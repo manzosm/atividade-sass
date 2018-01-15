@@ -1,0 +1,113 @@
+$tema: 'green';
+$backgroundContainer: #A9A9A9;
+$colorMenu:#000;
+$colorHover:#5dd9c0;
+$urlLogoBlack: url(../img/logo_black.png) center center no-repeat;
+$urlLogoWhite: url(../img/logo_white.png) center center no-repeat;
+$urlLogoGreen: url(../img/logo_green.png) center center no-repeat;
+
+//converter de pixel para em
+@function convertEm($valPx, $base:16) {
+    @return $valPx / $base + em;
+}
+
+@mixin logoBlack {
+    width: convertEm(220);
+    height: convertEm(70);
+    background: $urlLogoBlack;
+}
+
+@mixin logoWhite {
+    width: convertEm(220);
+    height: convertEm(70);
+    background: $urlLogoWhite;
+}
+
+@mixin logoGreen {
+    width: convertEm(220);
+    height: convertEm(70);
+    background: $urlLogoGreen;
+}
+
+@if $tema=='gray' {
+    $backgroundContainer: #A9A9A9;
+    $colorMenu: #000;
+    $colorHover: #5dd9c0;
+
+    .logo {
+        @include logoBlack;
+    }
+}
+
+@else if $tema=='black' {
+    $backgroundContainer: #000;
+    $colorMenu: #fff;
+    $colorHover: #A9A9A9;
+
+    .logo {
+        @include logoWhite;
+    }
+}
+
+@else if $tema=='green' {
+    $backgroundContainer: #008B8B;
+    $colorMenu: #fff;
+    $colorHover: #fff;
+
+    .logo {
+        @include logoGreen;
+    }
+}
+
+.container {
+    max-width: convertEm(960);
+    margin: 0 auto;
+    background: $backgroundContainer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.menu-nav {
+    ul {
+        list-style: none;
+        text-decoration: none;
+        align-items: flex-end;
+        margin-right: convertEm(30);
+    }
+
+    li {
+        display: inline-block;
+        margin: 0 10px 0 10px;
+        padding: 10px;
+
+        a {
+            text-decoration: none;
+            font-size: convertEm(18);
+            font-weight: bold;
+            color: $colorMenu;
+
+            &:hover {
+                color: $colorHover;
+            }
+            &::after {
+                content: '';
+                display: block;
+                background: $colorHover;
+                height: 2px;
+                width: 0;
+                transition: .3s;
+
+            }
+
+            &:hover::after {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.logo {
+    margin-left: 30px;
+}
